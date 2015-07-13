@@ -20,11 +20,6 @@ config_path = os.path.join(os.path.dirname(file_name),'CONFIG.txt')
 
 config = config_handler.Parser(filename=config_path)
 
-# first, check for configuration file
-error_msg = ("Didn't find config file in the location specified"
-           " in the body of the script!\n"+ "\tPath:\t" + config_path +
-            "\nIt should be in the current working directory, with" +
-            " the name \'CONFIG.txt\'.")
 
 if config.config_exists(config_path) != True:
     print error_msg
