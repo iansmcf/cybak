@@ -46,9 +46,15 @@ source_dir = os.environ['HOME']
 if config.get_setting('DIR','SRC_DIR') != '':
     source_dir = config.get_setting('DIR','SRC_DIR')
 
+
 # backup file name
+file_handle = 'MyBackup'
+
+if config.get_setting('NAME','FILENAME') != '':
+    file_handle = config.get_setting('NAME','FILENAME')
+
 timestamp = time.strftime('%Y%m%d.%H%M')
-file_name = (config.get_setting('NAME','FILENAME') + "-" + timestamp
+file_name = (file_handle + "-" + timestamp
          + '.' + str(random.randint(100,999)))
 
 # make backup directory if it does not already exist
