@@ -1,4 +1,4 @@
-from backup import dirwalker
+from cybak-lzma import dirwalker
 import unittest
 import os
 import re
