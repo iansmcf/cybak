@@ -17,17 +17,12 @@ import menu_generator
 file_name = os.path.abspath(sys.argv[0])
 dir_path = os.path.dirname(file_name)
 
-config_path = os.path.join(os.path.dirname(dir_path),'CONFIG.txt')
+config_path = '/etc/cybak.cfg'
 
 config = config_handler.Parser(filename=config_path)
 
-
 if config.config_exists(config_path) != True:
-    print error_msg
-    print ("Please create this file and re-run the script.") 
-    print ("An example configuration file has been included" +
-            " at the bottom of this script.")
-    sys.exit(1)
+    print "No configuration file found. Using defaults."
 
 
 # exception list
@@ -164,7 +159,7 @@ print("Backup complete. Have a nice day.")
 ## example: 
 ##   EXCEPTIONS=/this/dir,/noman/dir,
 ##
-#DIR_EXCEPT=/zfs_src,
+#DIR_EXCEPT=
 #FILE_EXCEPT=
 #
 ## IGNORE_HIDDEN will cause the script to ignore any file or directory
