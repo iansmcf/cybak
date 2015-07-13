@@ -14,18 +14,16 @@ import colorprint
 import menu_generator
 
 
-file_name = os.path.abspath(sys.argv[0])
-dir_path = os.path.dirname(file_name)
-
+# decide where the configuration file should reside and look for it 
+#file_name = os.path.abspath(sys.argv[0])
+#dir_path = os.path.dirname(file_name)
 config_path = '/etc/cybak.cfg'
-
 config = config_handler.Parser(filename=config_path)
-
 if config.config_exists(config_path) != True:
     print "No configuration file found. Using defaults."
 
 
-# exception list
+# build list of exceptions and remove empty terminal items
 dir_exceptions = config.get_setting('EXCEPT',
                         'DIR_EXCEPT').split(',')
 if dir_exceptions[-1] == ['']:
@@ -37,8 +35,12 @@ if file_exceptions[-1] == ['']:
 
 
 # set destination directory
-dest_dir = config.get_setting('DIR','DEST_DIR')
+dest_dir = '/backup/'
+# set destination root if the setting is non-blank
+if config.get_setting('DIR','DEST_DIR') != '':
+    dest_dir = config.get_setting('DIR','DEST_DIR')
 
+# set source directory
 source_dir = os.environ['HOME']
 # set source root if the setting is non-blank
 if config.get_setting('DIR','SRC_DIR') != '':
