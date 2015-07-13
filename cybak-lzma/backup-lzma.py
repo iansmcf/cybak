@@ -34,24 +34,25 @@ if file_exceptions[-1] == ['']:
     file_exceptions.pop()
 
 
-# set destination directory
+# set destination directory to default
 dest_dir = '/backup/'
-# set destination root if the setting is non-blank
+# change destination root if the setting is non-blank
 if config.get_setting('DIR','DEST_DIR') != '':
     dest_dir = config.get_setting('DIR','DEST_DIR')
 
-# set source directory
+# set source directory to default
 source_dir = os.environ['HOME']
-# set source root if the setting is non-blank
+# change the source root if the setting is non-blank
 if config.get_setting('DIR','SRC_DIR') != '':
     source_dir = config.get_setting('DIR','SRC_DIR')
 
 
-# backup file name
+# set backup file name to default
 file_handle = 'MyBackup'
-
+# change the backup file name if the setting is non-blank
 if config.get_setting('NAME','FILENAME') != '':
     file_handle = config.get_setting('NAME','FILENAME')
+
 
 timestamp = time.strftime('%Y%m%d.%H%M')
 file_name = (file_handle + "-" + timestamp
