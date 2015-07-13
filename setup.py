@@ -27,7 +27,7 @@ test_requirements = [
 
 setup(
     name='cybak',
-    version='0.1.0',
+    version='0.2.0',
     description="A simple backup script for Debian.",
     long_description=readme + '\n\n' + history,
     author="Ian McFarlane",

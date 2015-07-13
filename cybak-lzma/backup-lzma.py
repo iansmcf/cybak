@@ -15,8 +15,9 @@ import menu_generator
 
 
 file_name = os.path.abspath(sys.argv[0])
+dir_path = os.path.dirname(file_name)
 
-config_path = os.path.join(os.path.dirname(file_name),'CONFIG.txt')
+config_path = os.path.join(os.path.dirname(dir_path),'CONFIG.txt')
 
 config = config_handler.Parser(filename=config_path)
 
