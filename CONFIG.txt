@@ -1,0 +1,26 @@
+[DIR]
+# if empty, SRC_DIR will default to the "home" directory of the
+# current user ("~")
+SRC_DIR=
+DEST_DIR=/mnt/Archive/backup/
+
+[EXCEPT]
+# exceptions should be comma-separated
+# example: 
+#   EXCEPTIONS=/this/dir,/noman/dir,
+#
+DIR_EXCEPT=~/olduser,~/zfs_src,~/Downloads,
+FILE_EXCEPT=
+
+# IGNORE_HIDDEN will cause the script to ignore any file or directory
+# that begins with a period
+IGNORE_HIDDEN=True
+
+
+[NAME]
+# the output filename for the backup will begin with the following string
+# example:
+#   FILENAME=MyBackup
+#
+#   results in a file: MyBackup-20150106.1845.tar.lrz
+FILENAME=MyBackup
