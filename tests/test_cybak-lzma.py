@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 
 """
-test_cybak-lzma
+test_cybackup
 ----------------------------------
 
-Tests for `cybak-lzma` module.
+Tests for `cybackup` module.
 """
 
 import unittest
 import tempfile
 
-from cybak-lzma import cybak-lzma
+from cybackup import backuplzma
 
 class ConfigFixture(unittest.TestCase):
 
@@ -20,7 +20,7 @@ class ConfigFixture(unittest.TestCase):
         fil = tempfile.TemporaryFile()
         fil.write('[SECTION1]\ndir1=../\ndir2=~\ndirlist=./zsh_src/,/python')
         
-class TestCybak-lzma(unittest.TestCase):
+class TestCybackup(unittest.TestCase):
 
     def setUp(self):
         pass

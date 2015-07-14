@@ -34,15 +34,15 @@ setup(
     author_email='iansmcfarlane@gmail.com',
     url='https://github.com/iansmcf/cybak-lzma',
     packages=[
-        'cybak-lzma',
+        'cybackup',
     ],
-    package_dir={'cybak-lzma':
-                 'cybak-lzma'},
+    package_dir={'cybackup':
+                 'cybackup'},
     include_package_data=True,
     install_requires=requirements,
     license="BSD",
     zip_safe=False,
-    keywords='cybak-lzma',
+    keywords='cybackup',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

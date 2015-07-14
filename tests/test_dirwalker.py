@@ -1,4 +1,5 @@
-from cybak-lzma import dirwalker
+import pytest
+from cybackup import dirwalker
 import unittest
 import os
 import re
