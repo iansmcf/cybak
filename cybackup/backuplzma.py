@@ -30,6 +30,7 @@ try:
     if dir_exceptions[-1] == ['']:
         dir_exceptions.pop()
 except AttributeError:
+    dir_exceptions = []
     print "Missing or incorrect value for dir_exceptions."
 
 try:
@@ -38,26 +39,27 @@ try:
     if file_exceptions[-1] == ['']:
         file_exceptions.pop()
 except AttributeError:
+    file_exceptions = []
     print "Missing or incorrect value for file_exceptions."
 
 
 # set destination directory to default
 dest_dir = '/backup/'
 # change destination root if the setting is non-blank
-if config.get_setting('DIR','DEST_DIR') != '':
+if config.get_setting('DIR','DEST_DIR') != None:
     dest_dir = config.get_setting('DIR','DEST_DIR')
 
 # set source directory to default
 source_dir = os.environ['HOME']
 # change the source root if the setting is non-blank
-if config.get_setting('DIR','SRC_DIR') != '':
+if config.get_setting('DIR','SRC_DIR') != None:
     source_dir = config.get_setting('DIR','SRC_DIR')
 
 
 # set backup file name to default
 file_handle = 'MyBackup'
 # change the backup file name if the setting is non-blank
-if config.get_setting('NAME','FILENAME') != '':
+if config.get_setting('NAME','FILENAME') != None:
     file_handle = config.get_setting('NAME','FILENAME')
 
 
