@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 
 """
-test_cybackup
+test_scripts
 ----------------------------------
 
-Tests for `cybackup` module.
+Tests for `scripts`.
 """
 
 import unittest
 import tempfile
 
-from cybackup import backuplzma
+from scripts import backuplzma
 
 class ConfigFixture(unittest.TestCase):
 

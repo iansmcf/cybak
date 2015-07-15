@@ -27,17 +27,20 @@ test_requirements = [
 
 setup(
     name='cybak',
-    version='0.4.0',
+    version='0.4.2',
     description="A simple backup script for Debian.",
     long_description=readme + '\n\n' + history,
     author="Ian McFarlane",
     author_email='iansmcfarlane@gmail.com',
     url='https://github.com/iansmcf/cybak-lzma',
-    packages=[
-        'cybackup',
+    scripts=[
+        'scripts/cybak'
     ],
-    package_dir={'cybackup':
-                 'cybackup'},
+    packages=[
+        'dirwalker',
+    ],
+    package_dir={'dirwalker':
+                 'dirwalker'},
     include_package_data=True,
     install_requires=requirements,
     license="BSD",

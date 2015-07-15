@@ -11,7 +11,7 @@ Tests for `cybackup` module.
 import unittest
 import tempfile
 
-from cybackup import backuplzma.py
+from cybackup import backuplzma
 
 class ConfigFixture(unittest.TestCase):
 

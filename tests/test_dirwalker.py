@@ -1,5 +1,5 @@
 import pytest
-from cybackup import dirwalker
+from dirwalker import dirwalker
 import unittest
 import os
 import re

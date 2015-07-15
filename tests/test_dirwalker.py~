@@ -1,4 +1,5 @@
-from cybackup import dirwalker
+import pytest
+from dirwalker import dirwalker
 import unittest
 import os
 import re
