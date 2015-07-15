@@ -10,7 +10,7 @@ import random
 from dirwalker import file_lister
 import config_handler
 import pash
-import colorprint
+import termcolor
 import menu_generator
 
 
@@ -111,8 +111,8 @@ handle = dest_dir +  file_name + ".tar"
 proc = pash.ShellProc()
 proc.run("du -sh " + handle + " | column -t|cut -d ' ' -f 1")
 size = proc.get_val('stdout').rstrip('\n')
-print("The total size of the files in the built tarball is"),
-colorprint.color_out(size, int(96), '.\n')
+print("The total size of the files in the built tarball is: "),
+termcolor.cprint(size, 'cyan')
 print("The compressed backup will likely be smaller than this.\n")
 
 if len(sys.argv) > 1:
@@ -144,16 +144,17 @@ print data[0]
 
 command = "du -sh " + data[0].split(':')[1].lstrip(' ') + "| column -t | cut -d ' ' -f 1"
 proc.run(command)
-print "Compressed backup size: ", 
-colorprint.color_out(proc.get_val('stdout'), int(96))
+sys.stdout.write("Compressed backup size: ") 
+print repr(proc.get_val('stdout'))
+termcolor.cprint(proc.get_val('stdout'), 'cyan')
 
 
 for index, i in enumerate(data[1].split(' ')):
 	if i == 'Compression' and data[1].split(' ')[index+1] == 'Ratio:':
-		comp_ratio = data[1].split(' ')[index+2].rstrip('.')
+		comp_ratio = data[1].split(' ')[index+2].rstrip('.\n')
 
-print "Compression ratio:", 
-colorprint.color_out(comp_ratio, int(96))
+sys.stdout.write("Compression ratio: ") 
+termcolor.cprint(comp_ratio, 'cyan')
 
 
 print("\nDeleting the uncompressed tarball.")
