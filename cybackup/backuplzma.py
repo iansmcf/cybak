@@ -23,24 +23,17 @@ if config.config_exists(config_path) != True:
     print "No configuration file found. Using defaults."
 
 
-# build list of exceptions and remove empty terminal items
-try:
-    dir_exceptions = config.get_setting('EXCEPT',
-                        'DIR_EXCEPT').split(',')
-    if dir_exceptions[-1] == ['']:
-        dir_exceptions.pop()
-except AttributeError:
-    dir_exceptions = []
-    print "Missing or incorrect value for dir_exceptions."
+def build_exceptions(except_option):
+    try:
+        except_list = config.get_setting('EXCEPT',
+                        except_options).split(',')
+        if except_list[-1] == ['']:
+            dir_exceptions.pop()
+    except AttributeError:
+        except_list = []
 
-try:
-    file_exceptions = config.get_setting('EXCEPT',
-                            'FILE_EXCEPT').split(',')
-    if file_exceptions[-1] == ['']:
-        file_exceptions.pop()
-except AttributeError:
-    file_exceptions = []
-    print "Missing or incorrect value for file_exceptions."
+dir_exceptions = build_exceptions('DIR_EXCEPT')
+file_exceptions = build_exceptions('FILE_EXCEPT')
 
 
 # set destination directory to default
