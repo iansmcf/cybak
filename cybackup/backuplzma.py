@@ -26,11 +26,12 @@ if config.config_exists(config_path) != True:
 def build_exceptions(except_option):
     try:
         except_list = config.get_setting('EXCEPT',
-                        except_options).split(',')
+                        except_option).split(',')
         if except_list[-1] == ['']:
-            dir_exceptions.pop()
+            except_list.pop()
     except AttributeError:
         except_list = []
+    return except_list
 
 dir_exceptions = build_exceptions('DIR_EXCEPT')
 file_exceptions = build_exceptions('FILE_EXCEPT')
@@ -47,7 +48,6 @@ source_dir = os.environ['HOME']
 # change the source root if the setting is non-blank
 if config.get_setting('DIR','SRC_DIR') != None:
     source_dir = config.get_setting('DIR','SRC_DIR')
-
 
 # set backup file name to default
 file_handle = 'MyBackup'
@@ -138,7 +138,6 @@ print data[0]
 command = "du -sh " + data[0].split(':')[1].lstrip(' ') + "| column -t | cut -d ' ' -f 1"
 proc.run(command)
 sys.stdout.write("Compressed backup size: ") 
-print repr(proc.get_val('stdout'))
 termcolor.cprint(proc.get_val('stdout'), 'cyan')
 
 
