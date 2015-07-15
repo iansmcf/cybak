@@ -23,6 +23,7 @@ if config.config_exists(config_path) != True:
     print "No configuration file found. Using defaults."
 
 
+# a function to build lists of exceptions from a setting
 def build_exceptions(except_option):
     try:
         except_list = config.get_setting('EXCEPT',
@@ -33,6 +34,7 @@ def build_exceptions(except_option):
         except_list = []
     return except_list
 
+# build the file and directory exception lists 
 dir_exceptions = build_exceptions('DIR_EXCEPT')
 file_exceptions = build_exceptions('FILE_EXCEPT')
 
@@ -78,6 +80,7 @@ if ignore_hidden_str == "True" or ignore_hidden_str == "true":
     print "Ignoring hidden files and folders..."
     ignore_hidden = True
 
+# print files and directories that will be ignored
 print "Files that will be ignored:"
 for exc in file_exceptions:
     print " "*4, exc
@@ -108,6 +111,7 @@ print("The total size of the files in the built tarball is: "),
 termcolor.cprint(size, 'cyan')
 print("The compressed backup will likely be smaller than this.\n")
 
+# if 'auto' was passed to the script, do not ask for user confirmation
 if len(sys.argv) > 1:
     if sys.argv[1] == 'auto':
         result = True
