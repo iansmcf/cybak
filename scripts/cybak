@@ -36,27 +36,27 @@ def build_exceptions(except_option):
     return except_list
 
 # build the file and directory exception lists 
-dir_exceptions = build_exceptions('DIR_EXCEPT')
-file_exceptions = build_exceptions('FILE_EXCEPT')
+dir_exceptions = build_exceptions('dir_except')
+file_exceptions = build_exceptions('file_except')
 
 
 # set destination directory to default
 dest_dir = '/backup/'
 # change destination root if the setting is non-blank
-if config.get_setting('DIR','DEST_DIR') != None:
-    dest_dir = config.get_setting('DIR','DEST_DIR')
+if config.get_setting('DIR','dest_dir') != None:
+    dest_dir = config.get_setting('DIR','dest_dir')
 
 # set source directory to default
 source_dir = os.environ['HOME']
 # change the source root if the setting is non-blank
-if config.get_setting('DIR','SRC_DIR') != None:
-    source_dir = config.get_setting('DIR','SRC_DIR')
+if config.get_setting('DIR','src_dir') != None:
+    source_dir = config.get_setting('DIR','src_dir')
 
 # set backup file name to default
 file_handle = 'MyBackup'
 # change the backup file name if the setting is non-blank
-if config.get_setting('NAME','FILENAME') != None:
-    file_handle = config.get_setting('NAME','FILENAME')
+if config.get_setting('NAME','filename') != None:
+    file_handle = config.get_setting('NAME','filename')
 
 
 timestamp = time.strftime('%Y%m%d.%H%M')
@@ -76,7 +76,7 @@ print ""
 
 # set ignore_hidden
 ignore_hidden = False
-ignore_hidden_str = config.get_setting('EXCEPT','IGNORE_HIDDEN')
+ignore_hidden_str = config.get_setting('EXCEPT','ignore_hidden')
 if ignore_hidden_str == "True" or ignore_hidden_str == "true":
     print "Ignoring hidden files and folders..."
     ignore_hidden = True
@@ -159,34 +159,3 @@ os.remove(handle)
 
 print("Backup complete. Have a nice day.")
 
-
-# begin sample configuration file
-# remove the first layer of hashes to use
-
-#[DIR]
-## if empty, SRC_DIR will default to the "home" directory of the
-## current user
-#SRC_DIR=
-#DEST_DIR=/backup/my-backup/
-#
-#
-#[EXCEPT]
-## exceptions should be comma-separated
-## example: 
-##   EXCEPTIONS=/this/dir,/noman/dir,
-##
-#DIR_EXCEPT=
-#FILE_EXCEPT=
-#
-## IGNORE_HIDDEN will cause the script to ignore any file or directory
-## that begins with a period
-#IGNORE_HIDDEN=True
-#
-#
-#[NAME]
-## the output filename for the backup will begin with the following string
-## example:
-##   FILENAME=MyBackup
-##
-##   results in a file: MyBackup-20150106.1845.tar.lrz
-#FILENAME=MyBackup
