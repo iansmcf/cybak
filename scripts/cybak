@@ -116,6 +116,7 @@ print("The total size of the files to be backed up is: "),
 termcolor.cprint(sizeof_fmt(total_size), 'cyan')
 print("The compressed backup will likely be smaller than this.\n")
 # if 'auto' was passed to the script, do not ask for user confirmation
+result = False
 if len(sys.argv) > 1:
     if sys.argv[1] == 'auto':
         result = True
