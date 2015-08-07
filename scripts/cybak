@@ -29,7 +29,10 @@ def sizeof_fmt(num, suffix='B'):
 config_path = '/etc/cybak.cfg'
 config = config_handler.Parser(filename=config_path)
 if config.config_exists(config_path) != True:
-    print "No configuration file found. Using defaults."
+    print "No configuration file found. There should be a file"\
+            " named \'cybak.cfg\' in the project's folder. Copy this"\
+            " file to \'/etc/cybak.cfg\'." 
+    print "Using defaults for this run."
 
 
 # a function to build lists of exceptions from a setting
