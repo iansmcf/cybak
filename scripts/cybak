@@ -27,12 +27,13 @@ def sizeof_fmt(num, suffix='B'):
 #file_name = os.path.abspath(sys.argv[0])
 #dir_path = os.path.dirname(file_name)
 config_path = '/etc/cybak.cfg'
-config = config_handler.Parser(filename=config_path)
-if config.config_exists(config_path) != True:
+if os.path.exists(config_path) != True:
     print "No configuration file found. There should be a file"\
             " named \'cybak.cfg\' in the project's folder. Copy this"\
             " file to \'/etc/cybak.cfg\'." 
     print "Using defaults for this run."
+else:
+    config = config_handler.Parser(filename=config_path)
 
 
 # a function to build lists of exceptions from a setting
@@ -42,7 +43,7 @@ def build_exceptions(except_option):
                         except_option).split(',')
         if except_list[-1] == ['']:
             except_list.pop()
-    except AttributeError:
+    except (AttributeError, NameError):
         except_list = []
     return except_list
 
@@ -50,24 +51,22 @@ def build_exceptions(except_option):
 dir_exceptions = build_exceptions('dir_except')
 file_exceptions = build_exceptions('file_except')
 
+# a setting builder
+def build_setting(section, option, default):
+    setting = default
+    try:
+        if config.get_setting(section, option) != None:
+            setting = config.get_setting(section, option)
+    except NameError:
+        pass
+    return setting
 
-# set destination directory to default
-dest_dir = '/backup/'
-# change destination root if the setting is non-blank
-if config.get_setting('DIR','dest_dir') != None:
-    dest_dir = config.get_setting('DIR','dest_dir')
-
-# set source directory to default
-source_dir = os.environ['HOME']
-# change the source root if the setting is non-blank
-if config.get_setting('DIR','src_dir') != None:
-    source_dir = config.get_setting('DIR','src_dir')
-
-# set backup file name to default
-file_handle = 'MyBackup'
-# change the backup file name if the setting is non-blank
-if config.get_setting('NAME','filename') != None:
-    file_handle = config.get_setting('NAME','filename')
+# set the destination directory
+dest_dir = build_setting('DIR','dest_dir','/backup')
+# set the source directory
+source_dir = build_setting('DIR','src_dir', os.environ['HOME'])
+#set the backup file name
+file_handle = build_setting('NAME','filename','MyBackup')
 
 
 timestamp = time.strftime('%Y%m%d.%H%M')
@@ -87,10 +86,13 @@ print ""
 
 # set ignore_hidden
 ignore_hidden = False
-ignore_hidden_str = config.get_setting('EXCEPT','ignore_hidden')
-if ignore_hidden_str == "True" or ignore_hidden_str == "true":
-    print "Ignoring hidden files and folders..."
-    ignore_hidden = True
+try:
+    ignore_hidden_str = config.get_setting('EXCEPT','ignore_hidden')
+    if ignore_hidden_str == "True" or ignore_hidden_str == "true":
+        print "Ignoring hidden files and folders..."
+        ignore_hidden = True
+except NameError:
+    pass    
 
 # print files and directories that will be ignored
 print "Files that will be ignored:"
