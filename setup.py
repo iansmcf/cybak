@@ -17,7 +17,7 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'pash>=1.1.0',
     'termcolor>=1.1.0',
-    'config-handle>=0.2.6',
+    'config-handle>=0.3.0',
     'menugen>=0.1.0'
 ]
 
@@ -27,7 +27,7 @@ test_requirements = [
 
 setup(
     name='cybak',
-    version='0.4.3',
+    version='0.5.0',
     description="A simple backup script for Debian.",
     long_description=readme + '\n\n' + history,
     author="Ian McFarlane",
